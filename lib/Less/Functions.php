@@ -905,16 +905,6 @@ class Less_Functions{
 			$buf = false;
 		}
 
-
-		// IE8 cannot handle a data-uri larger than 32KB. If this is exceeded
-		// and the --ieCompat flag is enabled, return a normal url() instead.
-		$DATA_URI_MAX_KB = 32;
-		$fileSizeInKB = round( strlen($buf) / 1024 );
-		if( $fileSizeInKB >= $DATA_URI_MAX_KB ){
-			$url = new Less_Tree_Url( ($filePathNode ? $filePathNode : $mimetypeNode), $this->currentFileInfo);
-			return $url->compile($this);
-		}
-
 		if( $buf ){
 			$buf = $useBase64 ? base64_encode($buf) : rawurlencode($buf);
 			$filePath = '"data:' . $mimetype . ',' . $buf . '"';
